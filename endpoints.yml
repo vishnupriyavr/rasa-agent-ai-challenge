@@ -54,13 +54,15 @@ model_groups:
         model: rasa/cmd_gen_codellama_13b_calm_demo
         api_base: "https://tutorial-llm.rasa.ai"
 tracing:
- type: otlp
- endpoint: localhost:4317
- host: localhost
- service_name: rasa
+  type: jaeger
+  host: localhost
+  port: 6831
+  service_name: rasa
+  sync_export: ~
 
 metrics:
  type: otlp
  endpoint: localhost:4317
  host: localhost
  service_name: rasa
+ root_certificates: /etc/ssl/certs/ca.pem
