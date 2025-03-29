@@ -53,3 +53,14 @@ model_groups:
       - provider: rasa
         model: rasa/cmd_gen_codellama_13b_calm_demo
         api_base: "https://tutorial-llm.rasa.ai"
+tracing:
+ type: otlp
+ endpoint: localhost:4317
+ host: localhost
+ service_name: rasa
+
+metrics:
+ type: otlp
+ endpoint: localhost:4317
+ host: localhost
+ service_name: rasa
