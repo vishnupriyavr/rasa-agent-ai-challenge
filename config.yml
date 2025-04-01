@@ -1,12 +1,19 @@
 recipe: default.v1
 language: en
 pipeline:
+- name: DucklingEntityExtractor
+  url: "http://localhost:8000"
+  dimensions: ["time"]
+  timezone: "Europe/Berlin"
+  timeout: 3
+- name: NLUCommandAdapter
 - name: SingleStepLLMCommandGenerator
   llm:
-    model_group: rasa_command_generation_model
+    model_group: gpt-3.5-turbo-openai-model
   flow_retrieval:
     active: false
 
 policies:
-  - name: FlowPolicy
+- name: FlowPolicy
 #  - name: EnterpriseSearchPolicy
+assistant_id: 20250331-193631-khaki-marinade

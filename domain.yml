@@ -1,24 +1,147 @@
 version: "3.1"
 
 slots:
-  recipient:
+  spoken_language:
     type: text
     mappings:
       - type: from_llm
-  amount:
-    type: float
+  current_location:
+    type: text
     mappings:
       - type: from_llm
-
+  destination_location:
+    type: text
+    mappings:
+      - type: from_llm
+  transit_mode:
+    type: text
+    mappings:
+      - type: from_llm
+  departure_time:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: time
+      
+entities:
+  - time
+  
 responses:
-  utter_ask_recipient:
-    - text: "Who would you like to send money to?"
+  utter_ask_spoken_language:
+    - text: "placeholder"
+      metadata:
+        rephrase: True
+        rephrase_prompt: |
+          The following is a conversation with an AI assistant built with Rasa.
+          The assistant can help the navigate between locations.
+          The assistant is helpful, creative, clever, and very friendly.
+          The assistant should greet the user and ask for the spoken language of the user.
+          Context / previous conversation with the user:
+          {{history}}
+          {{current_input}}
+          Suggested AI Response:
 
-  utter_ask_amount:
-    - text: "How much money would you like to send?"
+  utter_ask_current_location:
+    - text: "placeholder"
+      metadata:
+        rephrase: True
+        rephrase_prompt: |
+          The following is a conversation with an AI assistant built with Rasa.
+          The assistant can help the navigate between locations.
+          The assistant is helpful, creative, clever, and very friendly.
+          The user is trying to go from one location to another, and the assistant should ask for the current
+          location of the user in the USER's language.
+          Context / previous conversation with the user:
+          {{history}}
+          {{current_input}}
+          Suggested AI Response:
 
-  utter_transfer_complete:
-    - text: "All done. {amount} has been sent to {recipient}."
+  utter_ask_destination_location:
+    - text: "placeholder"
+      metadata:
+        rephrase: True
+        rephrase_prompt: |
+          The following is a conversation with an AI assistant built with Rasa.
+          The assistant can help the navigate between locations.
+          The assistant is helpful, creative, clever, and very friendly.
+          The user is trying to go from one location to another, and the assistant should ask for the destination
+          location of the user in the USER's language.
+          Context / previous conversation with the user:
+          {{history}}
+          {{current_input}}
+          Suggested AI Response:
+    
+  utter_ask_transit_mode:
+    - text: "placeholder"
+      metadata:
+        rephrase: True
+        rephrase_prompt: |
+          The following is a conversation with an AI assistant built with Rasa.
+          The assistant can help the navigate between locations.
+          The assistant is helpful, creative, clever, and very friendly.
+          The user is trying to go from one location to another, and the assistant should ask for the preferred mode
+          of transport of the user in the USER's language.
+          Context / previous conversation with the user:
+          {{history}}
+          {{current_input}}
+          Suggested AI Response:
+
+  utter_ask_departure_time:
+    - text: "placeholder"
+      metadata:
+        rephrase: True
+        rephrase_prompt: |
+          The following is a conversation with an AI assistant built with Rasa.
+          The assistant can help the navigate between locations.
+          The assistant is helpful, creative, clever, and very friendly.
+          The user is trying to go from one location to another, and the assistant should ask for the preferred time
+          of departure of the user in the USER's language.
+          Context / previous conversation with the user:
+          {{history}}
+          {{current_input}}
+          Suggested AI Response:
+  
+  utter_provide_transit_details:
+    - text: "placeholder"
+      metadata:
+        rephrase: True
+        rephrase_prompt: |
+          The following is a conversation with an AI assistant built with Rasa.
+          The assistant can help the navigate between locations.
+          The assistant is helpful, creative, clever, and very friendly.
+          The user is asking for transit route and the assistant should reply the {route} as it is. 
+          Context / previous conversation with the user:
+          {{history}}
+          {{current_input}}
+          Suggested AI Response:
+
+  utter_provide_fare_details:
+    - text: "placeholder"
+      metadata:
+        rephrase: True
+        rephrase_prompt: |
+          The following is a conversation with an AI assistant built with Rasa.
+          The assistant can help the navigate between locations.
+          The assistant is helpful, creative, clever, and very friendly.
+          The user is asking for fare for a particular transit route assistant should reply in the USER's language, with {fare}.
+          Context / previous conversation with the user:
+          {{history}}
+          {{current_input}}
+          Suggested AI Response:
+
+  utter_provide_arrival_time_details:
+    - text: "placeholder"
+      metadata:
+        rephrase: True
+        rephrase_prompt: |
+          The following is a conversation with an AI assistant built with Rasa.
+          The assistant can help the navigate between locations.
+          The assistant is helpful, creative, clever, and very friendly.
+          The user is asking for arrival time for a particular transit route assistant should reply in the USER's language with {arrival_time}.
+          Context / previous conversation with the user:
+          {{history}}
+          {{current_input}}
+          Suggested AI Response:
 
   utter_free_chitchat_response:
     - text: "placeholder"
@@ -26,10 +149,14 @@ responses:
         rephrase: True
         rephrase_prompt: |
           The following is a conversation with an AI assistant built with Rasa.
-          The assistant can help the user transfer money.
+          The assistant can help the navigate between locations.
           The assistant is helpful, creative, clever, and very friendly.
-          The user is making small talk, and the assistant should respond, keeping things light.
+          The user is making small talk, and the assistant should respond, keeping things light in the USER's language.
           Context / previous conversation with the user:
           {{history}}
           {{current_input}}
           Suggested AI Response:
+actions:
+  - action_provide_transit_details
+  - action_provide_fare_details
+  - action_provide_arrival_time

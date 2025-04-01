@@ -1,8 +1,9 @@
 flows:
-  transfer_money:
-    description: Help users send money to friends and family.
+  get_transit_route:
+    description: Help the user to navigate between locations.
     steps:
-      - collect: recipient
-      - collect: amount
-        description: the number of US dollars to send
-      - action: utter_transfer_complete
+      - collect: spoken_language
+      - collect: current_location
+      - collect: destination_location
+      - collect: transit_mode
+      - action: "action_provide_transit_details"

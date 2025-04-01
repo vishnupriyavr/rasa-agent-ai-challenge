@@ -44,25 +44,12 @@ action_endpoint:
 # Allow rephrasing of responses using a Rasa-hosted model
 nlg:
   type: rephrase
+  rephrase_all: true
   llm:
-    model_group: rasa_command_generation_model
+    model_group: gpt-3.5-turbo-openai-model
 
 model_groups:
-  - id: rasa_command_generation_model
+  - id: gpt-3.5-turbo-openai-model
     models:
-      - provider: rasa
-        model: rasa/cmd_gen_codellama_13b_calm_demo
-        api_base: "https://tutorial-llm.rasa.ai"
-tracing:
-  type: jaeger
-  host: localhost
-  port: 6831
-  service_name: rasa
-  sync_export: ~
-
-metrics:
- type: otlp
- endpoint: localhost:4317
- host: localhost
- service_name: rasa
- root_certificates: /etc/ssl/certs/ca.pem
+      - provider: openai
+        model: gpt-3.5-turbo
